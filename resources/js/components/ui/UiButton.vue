@@ -1,5 +1,5 @@
 <template>
-    <button class="button button_orange"><slot /></button>
+    <button class="button"><slot /></button>
 </template>
 
 <script>
@@ -36,5 +36,25 @@ export default {
     background-color: var(--gray-dark);
     opacity: 0.43;
     color: var(--black);
+}
+.button_purple {
+    background-color: var(--purple)
+}
+.button_purple:hover {
+    background-color: #D50EB0;
+}
+.button_purple:disabled {
+    background-color: var(--gray);
+    opacity: 0.3;
+    color: var(--black);
+}
+.button_light {
+    background-color: transparent;
+    color: var(--black);
+    border: 1px solid var(--black);
+}
+.button_light:hover {
+    color: var(--white);
+    background-color: var(--black);
 }
 </style>

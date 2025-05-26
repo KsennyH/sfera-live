@@ -7,25 +7,7 @@
         <ul class="row rg40" v-if="courses.length">
             <li v-for="course in courses" :key="course.id" class="col-4 col-lg-6 col-sm-12">
                 <div class="container height100">
-                    <div class="card">
-                        <div class="card__info">
-                            <div class="card__type">
-                                <p class="t18 date light-text">{{ course.created_at }}</p>
-                            </div>
-                            <div class="height100">
-                                <div class="card__image" :style="{ backgroundImage: `url('${course.image}')` }">
-                                    <div class="event-logo">
-                                        <img src="https://sfm.events/wp-content/uploads/2024/09/sfera-congress-white.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card__titles">
-                            <h2 class="menu_heading uppercase mb3">{{ course.title }}</h2>
-                            <p class="t18">{{ course.introtext }}</p>
-                        </div>
-                        <button class="button button_purple card__btn">Регистрация</button>
-                    </div>
+                    <ProductCard :course="course"/>
                 </div>
             </li>
         </ul>
@@ -36,6 +18,7 @@
 
 <script setup>
 import MainLayout from '../layouts/MainLayout.vue';
+import ProductCard from '../components/ProductCard.vue';
 
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
@@ -107,7 +90,7 @@ courses.value = response.data.data
     margin-top: auto;
 }
 .card:hover .button {
-    background-color: #D50EB0;
+    background-color: #FF6820;
 }
 
 /* END CARD */

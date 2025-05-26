@@ -7,10 +7,10 @@ use App\Http\Controllers\Api\CourseController;
 
 Route::get('/courses', [CourseController::class, 'index']);
 Route::get('/courses/{course}', [CourseController::class, 'show']);
-// Route::post('/courses', [CourseController::class, 'store']);
+Route::post('/courses', [CourseController::class, 'store']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/courses', [CourseController::class, 'store'])->middleware('admin');
+    // Route::post('/courses', [CourseController::class, 'store'])->middleware('admin');
     Route::put('/courses/{course}', [CourseController::class, 'update'])->middleware('admin');
     Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->middleware('admin');
 

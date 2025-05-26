@@ -2,7 +2,7 @@
   <MainLayout>
     <section class="section">
         <div class="container">
-            <h1 class="h3 title">Список курсов</h1>
+            <h1 class="h3 title">Вебинары</h1>
         </div>
         <ul class="row rg40" v-if="courses.length">
             <li v-for="course in courses" :key="course.id" class="col-4 col-lg-6 col-sm-12">
@@ -32,66 +32,3 @@ courses.value = response.data.data
 });
 
 </script>
-
-  <style>
-/* CARD */
-
-.card {
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--gap);
-    height: 100%;
-}
-.card__info img {
-    width: 100%;
-    max-height: 260px;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-}
-.card__type {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: calc(var(--step) * 2);
-}
-.card__image {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: var(--border-radius);
-    min-height: 260px;
-}
-.card-img {
-    background-position: -130px top;
-    background-repeat: no-repeat;
-    background-size: auto 115%;
-    min-height: 260px;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
-.event-sfera {
-    align-self: flex-end;
-}
-.card .event-logo {
-    max-width: 140px;
-    margin: 0 calc(var(--step) * 3) calc(var(--step) * 3) auto;
-}
-.event-logo {
-    max-width: 230px;
-    margin: 0 calc(var(--step) * 6) calc(var(--step) * 6) auto;
-}
-.card__buttons {
-    display: flex;
-    align-items: center;
-    gap: var(--gap);
-    margin-top: auto;
-}
-.card__btn {
-    align-self: flex-start;
-    margin-top: auto;
-}
-.card:hover .button {
-    background-color: #FF6820;
-}
-
-/* END CARD */
-</style>

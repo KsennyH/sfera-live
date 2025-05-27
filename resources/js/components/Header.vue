@@ -1,3 +1,8 @@
+<script setup>
+    import { currentUser, logout } from '../src/stores/auth';
+    
+</script>
+
 <template>
     <header class="header">
         <div class="header__top">
@@ -55,9 +60,14 @@
                         <li><router-link to="/">Главная</router-link></li>
                         <li><router-link to="/courses">Все курсы</router-link></li>
                         <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
-                        <li><router-link to="/dashboard">Личный кабинет</router-link></li>
-                        <li><router-link to="/login">Вход</router-link></li>
-                        <li><router-link to="/register">Регистрация</router-link></li>
+                        <template v-if="!currentUser">
+                            <li><router-link to="/login">Вход</router-link></li>
+                            <li><router-link to="/register">Регистрация</router-link></li>
+                        </template>
+                        <template v-else>
+                            <li><router-link to="/dashboard">Личный кабинет</router-link></li>
+                            <li><button @click="logout">Выйти</button></li>
+                        </template>
                     </ul>
                 </nav>
             </div>

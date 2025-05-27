@@ -1,6 +1,6 @@
 import * as VueRouter from 'vue-router';
 import Home from '../pages/Home.vue'
-import Course from '../pages/Course.vue'
+import CourseSingle from '../pages/CourseSingle.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Dashboard from '../pages/Dashboard.vue'
@@ -14,9 +14,9 @@ export default VueRouter.createRouter({
       component: Home
     },
     {
-      path: '/course/:id',
+      path: '/courses/:id',
       name: 'course',
-      component: Course,
+      component: CourseSingle,
       props: true
     },
     {

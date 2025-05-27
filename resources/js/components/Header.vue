@@ -20,7 +20,7 @@
                 </button>
             </div>
         </div>
-        <a href="https://sfm.events/conferences" class="header-logo header-logo_desctop">
+        <a href="/" class="header-logo header-logo_desctop">
             <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
         </a>
         <nav class="mobile-nav">
@@ -28,8 +28,7 @@
                 <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
             </a>
             <ul class="mobile-nav__list">
-                <li><router-link to="/" class="uppercase">Vcube</router-link></li>
-                <li><a class="eng menu_heading" href="https://sfm.events/home">Все курсы</a></li>
+                <li><router-link to="/courses">Все курсы</router-link></li>
                 <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
                 <li><router-link to="/login">Вход</router-link></li>
                 <li><router-link to="/register">Регистрация</router-link></li>
@@ -53,8 +52,8 @@
             <div class="container">
                 <nav class="navigation">
                     <ul class="navigation__list">
-                        <li><router-link to="/" class="uppercase">Vcube</router-link></li>
-                        <li><a class="eng menu_heading" href="https://sfm.events/home">Все курсы</a></li>
+                        <li><router-link to="/">Главная</router-link></li>
+                        <li><router-link to="/courses">Все курсы</router-link></li>
                         <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
                         <li><router-link to="/dashboard">Личный кабинет</router-link></li>
                         <li><router-link to="/login">Вход</router-link></li>

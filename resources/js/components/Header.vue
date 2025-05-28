@@ -1,5 +1,14 @@
 <script setup>
-    import { currentUser, logout } from '../src/stores/auth';
+    import { useAuthStore } from '../stores/AuthStore';
+    import { useRouter } from 'vue-router';
+
+    const auth = useAuthStore()
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        await auth.logout()
+        router.push('/')
+    }
     
 </script>
 
@@ -33,7 +42,6 @@
                 <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
             </a>
             <ul class="mobile-nav__list">
-                <li><router-link to="/courses">Все курсы</router-link></li>
                 <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
                 <li><router-link to="/login">Вход</router-link></li>
                 <li><router-link to="/register">Регистрация</router-link></li>
@@ -58,15 +66,14 @@
                 <nav class="navigation">
                     <ul class="navigation__list">
                         <li><router-link to="/">Главная</router-link></li>
-                        <li><router-link to="/courses">Все курсы</router-link></li>
                         <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
-                        <template v-if="!currentUser">
+                        <template v-if="!auth.user">
                             <li><router-link to="/login">Вход</router-link></li>
                             <li><router-link to="/register">Регистрация</router-link></li>
                         </template>
                         <template v-else>
                             <li><router-link to="/dashboard">Личный кабинет</router-link></li>
-                            <li><button @click="logout">Выйти</button></li>
+                            <li><button @click="handleLogout">Выйти</button></li>
                         </template>
                     </ul>
                 </nav>

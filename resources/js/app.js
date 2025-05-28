@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-import axios from 'axios'
-import { fetchUser } from './src/stores/auth'
+// import { fetchUser } from './src/stores/auth'
 
-fetchUser()
+// fetchUser()
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(createPinia()).mount('#app')

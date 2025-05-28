@@ -1,10 +1,15 @@
 <template>
-    <div class="p-4">
-      <router-view></router-view>
-    </div>
-  </template>
+  <router-view></router-view>
+</template>
   
-  <script setup>
+<script setup>
+  import { onMounted } from 'vue';
+  import { useAuthStore } from './stores/AuthStore';
 
+  const auth = useAuthStore()
 
-  </script>
+  onMounted(() => {
+    auth.fetchUser()
+  })
+
+</script>

@@ -4,8 +4,9 @@ import CourseSingle from '../pages/CourseSingle.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Dashboard from '../pages/Dashboard.vue'
+import { useAuthStore } from '../stores/AuthStore';
 
-export default VueRouter.createRouter({
+const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory('/'),
   routes: [
     {
@@ -32,8 +33,30 @@ export default VueRouter.createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      meta: { requiresAuth: true, requiresAdmin: true }
     }
   ]
 });
+
+router.beforeEach(async (to, from, next) => {
+    const auth = useAuthStore()
+
+    if (!auth.user) {
+        await auth.fetchUser()
+    }
+
+    if (to.meta.requiresAuth && !auth.user) {
+        return next('/login')
+    }
+
+    if (to.meta.requiresAdmin && !auth.user?.is_admin) {
+        return next('/')
+    }
+
+    next()
+})
+
+export default router;
+
 

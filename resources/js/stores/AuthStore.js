@@ -35,6 +35,7 @@ export const useAuthStore = defineStore('auth-store', () => {
             await axios.get('/sanctum/csrf-cookie')
             await axios.post('api/login', credentials)
             await fetchUser()
+            console.log(user);
         } catch (err) {
             if (err.response?.data?.errors) {
                 error.value = Object.values(err.response.data.errors).flat().join(' ')

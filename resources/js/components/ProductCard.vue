@@ -19,7 +19,7 @@
     
 </template>
 <script setup>
-import UiButton from './ui/UiButton.vue';
+    import UiButton from './ui/UiButton.vue';
 
     const props = defineProps({
         course: {

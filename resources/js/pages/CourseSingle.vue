@@ -1,40 +1,37 @@
 <template>
     <MainLayout>
-        <section class="section" v-if="course">
+        <section class="section" v-if="courseStore.course">
             <div class="container">
-                <h1 class="h3 title mb10">{{ course.title }}</h1>
+                <h1 class="h3 title mb10">{{ courseStore.course.title }}</h1>
                 <div class="menu_heading mb6">
-                    <p>{{ course.introtext }}</p>
+                    <p>{{ courseStore.course.introtext }}</p>
                 </div>
                 <div class="mb6" style="max-width: 50%;">
-                    <img :src="course.image" :alt="course.title">
+                    <img :src="courseStore.course.image" :alt="courseStore.course.title">
                 </div>
                 <div class="t18 mb6">
-                    <p>{{ course.content }}</p>
+                    <p>{{ courseStore.course.content }}</p>
                 </div>
                 <UiButton class="button_orange">Купить</UiButton>
             </div>
         </section>
+        <div v-if="isLoading">Загрузка...</div>
+        <div v-if="error">{{ error }}</div>
     </MainLayout>
     
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import MainLayout from '../layouts/MainLayout.vue';
-import axios from 'axios'
+import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCourseStore } from '../stores/CourseStore';
+import MainLayout from '../layouts/MainLayout.vue';
 import UiButton from '../components/ui/UiButton.vue';
 
 const route = useRoute();
-const course = ref({})
+const courseStore = useCourseStore()
 
-onMounted(async() => {
-    try {
-        const response = await axios.get(`/api/courses/${route.params.id}`)
-        course.value = response.data.data
-    } catch (error) {
-        console.error('Ошибка при загрузке курса:', error)
-    }
+onMounted(() => {
+    courseStore.fetchSingleCourse(route.params.id)
 })
 </script>

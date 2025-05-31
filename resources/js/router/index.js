@@ -5,6 +5,8 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Dashboard from '../pages/Dashboard.vue'
 import { useAuthStore } from '../stores/AuthStore';
+import CreateCourse from '../pages/CreateCourse.vue';
+import EditCourse from '../pages/EditCourse.vue';
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory('/'),
@@ -35,6 +37,18 @@ const router = VueRouter.createRouter({
       name: 'dashboard',
       component: Dashboard,
       meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/dashboard/create',
+      name: 'course-create',
+      component: CreateCourse,
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/dashboard/:id/edit',
+      name: 'course-edit',
+      component: EditCourse,
+      meta: { requiresAuth: true, requiresAdmin: true },
     }
   ]
 });

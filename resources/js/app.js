@@ -2,8 +2,10 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-// import { fetchUser } from './src/stores/auth'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 
-// fetchUser()
+library.add(faPenToSquare)
 
-createApp(App).use(router).use(createPinia()).mount('#app')
+createApp(App).use(router).use(createPinia()).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

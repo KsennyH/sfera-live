@@ -23,14 +23,15 @@ class CourseResource extends JsonResource
             $canSeeMedia = $user->isAdmin() || $this->users->contains($user->id);
         }
 
+        $image = $this->media->where('type', 'image')->first();
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'introtext' => $this->introtext,
             'content' => $this->content,
             'is_published' => $this->is_published,
-            'image' => $this->media->first()?->path ? asset('storage/' . $this->media()->first()->path)
-                : null,
+            'image' => $image ? asset('storage/' . $image->path) : null,
             'media' => $canSeeMedia
                 ? MediaResource::collection($this->whenLoaded('media'))
                 : [],

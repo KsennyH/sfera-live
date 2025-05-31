@@ -90,7 +90,8 @@
     row-gap: calc(var(--step) * 10);
 }
 .header__top {
-    background-color: var(--gray-dark);
+    background-color: var(--body-gray);
+    color: var(--white);
     padding: var(--gap-half);
     position: relative;
 }

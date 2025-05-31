@@ -1,10 +1,19 @@
 <template>
-    <button class="button"><slot /></button>
+    <button class="button" :disabled="disabled" @click="handleClick"><slot /></button>
 </template>
 
-<script>
-export default {
-    name: "ui-button"
+<script setup>
+const props = defineProps({
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+})
+const emit = defineEmits(['click'])
+const handleClick = (event) => {
+  if (!props.disabled) {
+    emit('click', event)
+  }
 }
 </script>
 

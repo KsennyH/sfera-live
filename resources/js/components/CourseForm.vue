@@ -1,9 +1,10 @@
 <script setup>
     import { ref } from 'vue'
-    import axios from 'axios'
     import { useRouter } from 'vue-router'
+    import { useCourseStore } from '../stores/CourseStore';
 
     const router = useRouter();
+    const courseStore = useCourseStore()
 
     const form = ref({
         title: "",
@@ -17,27 +18,13 @@
         form.value.image = event.target.files[0]
     }
 
-    async function submitForm() {
-        const formData = new FormData();
-        formData.append('title', form.value.title);
-        formData.append('introtext', form.value.introtext);
-        formData.append('content', form.value.content);
-        formData.append('is_published', form.value.is_published ? 1 : 0);
-        if(form.value.image) {
-            formData.append('image', form.value.image);
+    async function submitForm () {
+        try {
+            await courseStore.createCourse(form.value)
+            router.push('/dashboard')
+        } catch (err) {
+            console.log('Ошибка при создании курса:', err.response?.data || err.message)
         }
-
-        try{
-            await axios.post('api/courses', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            router.push('/');
-        } catch (error) {
-            console.error('Ошибка при создании курса:', error.response?.data || error.message)
-        }
-        console.log(formData);
     }
 </script>
 

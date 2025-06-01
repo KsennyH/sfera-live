@@ -15,9 +15,8 @@
             <div class="mb6">
                 <img :src="courseStore.course.image" :alt="courseStore.course.title">
             </div>
-            <video width="100%" height="auto" controls>
-                <source src="movie.mp4" type="video/mp4">
-                <source src="movie.ogg" type="video/ogg">
+            <video width="100%" height="auto" controls v-if="videoUrl">
+                <source :src="videoUrl" type="video/mp4">
                 Ваш браузер не поддерживает воспроизведение видео.
             </video>
         </div>
@@ -27,7 +26,7 @@
     import DashboardLayout from '../layouts/DashboardLayout.vue';
     import { useCourseStore } from '../stores/CourseStore';
     import { useRouter } from 'vue-router'
-    import { onMounted } from 'vue';
+    import { onMounted, computed } from 'vue';
     const router = useRouter()
     import { useRoute } from 'vue-router';
     const courseStore = useCourseStore()
@@ -39,6 +38,11 @@
             router.push('/dashboard')
         }
     }
+
+    const videoUrl = computed(() => {
+        const video = courseStore.course.media?.find(m => m.type === 'video')
+        return video ? `/storage/${video.path}` : null
+    })
 
     onMounted(() => {
         courseStore.fetchSingleCourse(route.params.id)

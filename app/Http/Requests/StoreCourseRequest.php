@@ -27,6 +27,7 @@ class StoreCourseRequest extends FormRequest
             'content' => 'required|string',
             'is_published' => 'boolean',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'video' => 'nullable|file|mimetypes:video/mp4,video/webm,video/ogg|max:51200'
         ];
     }
 }

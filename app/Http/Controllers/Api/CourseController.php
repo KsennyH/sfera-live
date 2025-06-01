@@ -44,6 +44,15 @@ class CourseController extends Controller
             ]);
         }
 
+        if ($request->hasFile('video')) {
+            $path = $request->file('video')->store('media', 'public');
+
+            $course->media()->create([
+                'type' => 'video',
+                'path' => $path,
+            ]);
+        }
+
         return new CourseResource($course->load('media'));
     }
 

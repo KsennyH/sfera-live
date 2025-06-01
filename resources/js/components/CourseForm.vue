@@ -14,6 +14,12 @@
         is_published: false,
         image: null
     });
+
+    form.value.video = null
+
+    function handleVideoChange(event) {
+        form.value.video = event.target.files[0]
+    }
     
     function handleFileChange(event) {
         form.value.image = event.target.files[0]
@@ -71,10 +77,13 @@
                 <input type="file" id="image" @change="handleFileChange" />
             </div>
 
-            <button type="submit" class="button button_purple">Создать</button>
+            <div class="form-group mb10">
+                <label class="mb3 menu_heading" for="video">Видео</label>
+                <input type="file" id="video" accept="video/*" @change="handleVideoChange" />
+            </div>
+
+            <button type="submit" class="button button_orange">Создать</button>
         </form>
         </div>
     </section>
 </template>
-<script setup>
-</script>

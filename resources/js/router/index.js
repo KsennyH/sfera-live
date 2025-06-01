@@ -7,6 +7,7 @@ import Dashboard from '../pages/Dashboard.vue'
 import { useAuthStore } from '../stores/AuthStore';
 import CreateCourse from '../pages/CreateCourse.vue';
 import EditCourse from '../pages/EditCourse.vue';
+import ShowCourse from '../pages/ShowCourse.vue';
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory('/'),
@@ -36,6 +37,12 @@ const router = VueRouter.createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/dashboard/:id',
+      name: 'dashboard-course',
+      component: ShowCourse,
       meta: { requiresAuth: true, requiresAdmin: true }
     },
     {

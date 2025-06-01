@@ -1,14 +1,14 @@
 <template>
     <div class="sidebar radius height100">
         <ul>
-        <li class="flex vertical-center cg12" v-if="auth.user">
+        <li class="flex vertical-center cg12 menu_heading" v-if="auth.user">
             <div class="avatar">{{ auth.user.name.slice(0, 1) }}</div>
             <div>Привет, {{ auth.user.name }}</div>
         </li>
-        <li><router-link to="/dashboard">Мои курсы</router-link></li>
-        <li>Мои вебинары</li>
-        <li>Мои конференции</li>
-        <li><button @click="handleLogout">Выход</button></li>
+        <li class="menu_heading"><router-link to="/dashboard">Мои курсы</router-link></li>
+        <li class="menu_heading">Мои вебинары</li>
+        <li class="menu_heading">Мои конференции</li>
+        <li class="menu_heading"><button @click="handleLogout">Выход</button></li>
         </ul>
     </div>
 </template>

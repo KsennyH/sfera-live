@@ -28,7 +28,6 @@ export const useCourseStore = defineStore("course-store", () => {
         try {
             const response = await axios.get(`/api/courses/${id}`)
             course.value = response.data.data
-            console.log(course.value);
             return course.value
         } catch (err) {
             error.value = 'Курс не найден'
@@ -81,5 +80,14 @@ export const useCourseStore = defineStore("course-store", () => {
         
     }
 
-    return { courses, course, isLoading, error, fetchCourses, fetchSingleCourse, createCourse, updateCourse }
+    const deleteCourse = async (id) => {
+        try {
+            await axios.delete(`/api/courses/${id}`)
+        } catch (error) {
+            console.error('Ошибка при удалении курса:', error.response?.data || error.message)
+            throw error
+        }
+    }
+
+    return { courses, course, isLoading, error, fetchCourses, fetchSingleCourse, createCourse, updateCourse, deleteCourse }
 })

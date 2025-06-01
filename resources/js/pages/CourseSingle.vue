@@ -9,9 +9,7 @@
                 <div class="mb6" style="max-width: 50%;">
                     <img :src="courseStore.course.image" :alt="courseStore.course.title">
                 </div>
-                <div class="t18 mb6">
-                    <p>{{ courseStore.course.content }}</p>
-                </div>
+                <div class="t18 mb6 content" v-html="courseStore.course.content"></div>
                 <UiButton class="button_orange">Купить</UiButton>
             </div>
         </section>

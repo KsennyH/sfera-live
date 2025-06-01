@@ -2,6 +2,7 @@
     import { ref } from 'vue'
     import { useRouter } from 'vue-router'
     import { useCourseStore } from '../stores/CourseStore';
+    import Editor from '@tinymce/tinymce-vue';
 
     const router = useRouter();
     const courseStore = useCourseStore()
@@ -31,8 +32,6 @@
 <template>
     <section class="section">
         <div class="container">
-        <h1 class="h3 title">Создать курс</h1>
-
         <form @submit.prevent="submitForm" enctype="multipart/form-data">
             <div class="form-group mb10">
                 <label class="mb3 menu_heading" for="title">Название курса</label>
@@ -45,8 +44,19 @@
             </div>
 
             <div class="form-group mb10">
-                <label class="mb3 menu_heading" for="content">Контент</label>
-                <textarea class="input" id="content" required v-model="form.content"></textarea>
+                <div class="mb3 menu_heading">Контент</div>
+                <Editor
+                    api-key="nnon89gl4k8r630a0xov226rn71e44cgdl2eboaym9xuojnp"
+                    v-model="form.content"
+                    :init="{
+                    height: 400,
+                    menubar: false,
+                    plugins: 'lists link preview code fullscreen',
+                    toolbar: 'undo redo | bold italic underline | bullist numlist | link image | preview code fullscreen',
+                    branding: false
+                    }"
+                />
+                <!-- image -->
             </div>
 
             <div class="form-group mb10">

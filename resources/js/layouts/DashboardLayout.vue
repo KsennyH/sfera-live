@@ -1,27 +1,37 @@
 <template>
-  <div>
-    <header>
-        <div class="header__top">
-            <div class="container"> 
-        <div class="header__contacts">
-            <div class="mail">
-                <ul class="mail__list">
-                    <li><a href="mailto:sfera.fm">sfera.fm</a></li>
-                    <li><a href="tel:+79200000000">+79200000000</a></li>
-                </ul>
+    <MainHeader />
+    <main>
+        <section class="section dashboard">
+          <div class="container">
+            <h1 class="h3 title mb10">Личный кабинет</h1>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="container height100">
+                <DashboardSidebar @logout="handleLogout" />
+              </div>
             </div>
-            <a href="https://sfm.events/conferences" class="header-logo">
-                <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
-            </a>
-        </div>
-    </div>
-        </div>
-    </header>
-    <main class="p-4">
-      <slot />
+            <div class="col-9">
+              <div class="container">
+                <slot />
+              </div>
+            </div>
+          </div>
+        </section>
     </main>
-  </div>
 </template>
 
 <script setup>
+    import MainHeader from '../components/MainHeader.vue';
+    import DashboardSidebar from '../components/DashboardSidebar.vue';
+    import { useAuthStore } from '../stores/AuthStore';
+    import { useRouter } from 'vue-router'
+    const router = useRouter()
+    const auth = useAuthStore()
+
+    const handleLogout = async() => {
+        await auth.logout()
+        router.push('/')
+    }
+
 </script>

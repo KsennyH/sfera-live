@@ -3,7 +3,7 @@
         <ul>
         <li class="flex vertical-center cg12 menu_heading" v-if="auth.user">
             <div class="avatar">{{ auth.user.name.slice(0, 1) }}</div>
-            <div>Привет, {{ auth.user.name }}</div>
+            <div>{{ auth.user.name }}</div>
         </li>
         <li class="menu_heading"><router-link to="/dashboard">Мои курсы</router-link></li>
         <li class="menu_heading">Мои вебинары</li>

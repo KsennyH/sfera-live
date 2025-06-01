@@ -1,6 +1,10 @@
 <script setup>
     import { useAuthStore } from '../stores/AuthStore';
     import { useRouter } from 'vue-router';
+    import HeaderTop from './HeaderTop.vue';
+    import MainLogo from './MainLogo.vue';
+    import { useRoute } from 'vue-router'
+    const route = useRoute()
 
     const auth = useAuthStore()
     const router = useRouter()
@@ -14,50 +18,27 @@
 
 <template>
     <header class="header">
-        <div class="header__top">
-            <div class="container"> 
-                <div class="header__contacts">
-                    <div class="mail">
-                        <ul class="mail__list">
-                            <li><a href="mailto:sfera.fm">sfera.fm</a></li>
-                            <li><a href="tel:+79200000000">+79200000000</a></li>
-                        </ul>
-                    </div>
-                    <a href="https://sfm.events/conferences" class="header-logo">
-                        <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
-                    </a>
-                </div>
-            </div>
+        <HeaderTop>
             <div class="header__mobile-btn">
                 <button class="mobile-button">
                     <span class="mobile-button__icon"></span>
                 </button>
             </div>
-        </div>
-        <a href="/" class="header-logo header-logo_desctop">
-            <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
-        </a>
+        </HeaderTop>
+        <MainLogo />
         <nav class="mobile-nav">
-            <a href="https://sfm.events/conferences" class="header-logo">
-                <img src="https://sfm.events/wp-content/uploads/2024/07/Sfera_congress.png" alt="Логотип Сфера конгресс">
-            </a>
+            <MainLogo />
             <ul class="mobile-nav__list">
-                <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
-                <li><router-link to="/login">Вход</router-link></li>
-                <li><router-link to="/register">Регистрация</router-link></li>
+                <li class="menu_heading"><a href="https://sfm.events/events">Вебинары</a></li>
+                <li class="menu_heading"><router-link to="/login">Вход</router-link></li>
+                <li class="menu_heading"><router-link to="/register">Регистрация</router-link></li>
             </ul>
             <div class="mobile-nav__mail">
                 <div class="mail">
                     <ul class="mail__list">
-                        <li><a href="mailto:sfera.fm">sfera.fm</a></li>
-                        <li><a href="tel:+79200000000">+79200000000</a></li>
+                        <li><a href="mailto:sfera.fm">info@sfera.live</a></li>
+                        <li><a href="tel:+78122456770">+7 (812) 245-67-70</a></li>
                     </ul>
-                </div>
-            </div>
-            <div class="mobile-nav__lang">
-                <div class="languages">
-                    <a href="#">Ru</a>
-                    <a href="#">Eng</a>
                 </div>
             </div>
         </nav>
@@ -65,15 +46,15 @@
             <div class="container">
                 <nav class="navigation">
                     <ul class="navigation__list">
-                        <li><router-link to="/">Главная</router-link></li>
-                        <li><a class="eng menu_heading" href="https://sfm.events/events">Вебинары</a></li>
+                        <li class="menu_heading"><router-link to="/" active-class="active">Главная</router-link></li>
+                        <li class="menu_heading"><a href="https://sfm.events/events">Вебинары</a></li>
                         <template v-if="!auth.user">
-                            <li><router-link to="/login">Вход</router-link></li>
-                            <li><router-link to="/register">Регистрация</router-link></li>
+                            <li class="menu_heading"><router-link to="/login" active-class="active">Вход</router-link></li>
+                            <li class="menu_heading"><router-link to="/register" active-class="active">Регистрация</router-link></li>
                         </template>
                         <template v-else>
-                            <li><router-link to="/dashboard">Личный кабинет</router-link></li>
-                            <li><button @click="handleLogout">Выйти</button></li>
+                            <li class="menu_heading"><router-link to="/dashboard" :class="[{ active: route.path.startsWith('/dashboard') }]">Личный кабинет</router-link></li>
+                            <li class="menu_heading"><button @click="handleLogout">Выйти</button></li>
                         </template>
                     </ul>
                 </nav>
@@ -81,50 +62,17 @@
         </div>
     </header>
 </template>
-<style>
-/* HEADER */
-
+<style scoped>
 .header {
     display: flex;
     flex-direction: column;
     row-gap: calc(var(--step) * 10);
-}
-.header__top {
-    background-color: var(--body-gray);
-    color: var(--white);
-    padding: var(--gap-half);
-    position: relative;
-}
-.header__contacts {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--gap);
-    font-size: var(--text);
-    margin-left: auto;
-}
-.header .mail__list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--gap);
-}
-.header .mail__list li {
-    margin: 0;
-}
-.header__contacts .header-logo {
-    display: none;
 }
 .header__mobile-btn {
     position: absolute;
     right: 20px;
     top: 8px;
     z-index: 1000;
-}
-.header-logo {
-    max-width: 230px;
-    margin: 0 auto;
 }
 .navigation {
     width: 100%;
@@ -140,44 +88,21 @@
 .navigation a {
     font-size: var(--text);
 }
-.navigation li.current-menu-item{
+.navigation a.active {
     position: relative;
     padding-left: calc(var(--step) * 4);
 }
-.navigation li.current-menu-item::after {
+.navigation a.active::after {
     content: "";
     position: absolute;
     width: 9px;
     height: 9px;
-    background-color: var(--purple);
+    background-color: var(--orange);
     left: 0;
     top: 50%;
     border-radius: 50%;
     transform: translateY(-50%);
 }
-
-/* MAIL */
-
-.mail li {
-    white-space: nowrap;
-}
-
-/* END MAIL */
-
-/* LANGUAGES */
-
-.languages {
-    display: flex;
-    gap: var(--step);
-}
-.languages a.current-lang {
-    color: #A1A1A1;
-}
-
-/* END LANGUAGES */
-
-/* MOBILE NAV */
-
 .mobile-button {
     width: 40px;
     height: 40px;
@@ -272,6 +197,4 @@
 .nav-active {
     color: #A51A8B;
 }
-
-/* END MOBILE NAV */
 </style>
